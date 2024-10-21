@@ -20,6 +20,8 @@ class Contiguous{
     void clear();
     int length();
     T* index_at(int);
+    void insert_at(int, T);
+    T* delete_at(int);
     void print(); // for test;
 };
 # endif

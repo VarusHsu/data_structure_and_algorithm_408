@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/varus/workdir/github.com/varushsu/data_structure_and_algorithm_408/chapter_1/contiguous_list'
+relocations:     []
+...

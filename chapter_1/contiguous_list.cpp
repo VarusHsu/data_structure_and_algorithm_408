@@ -76,6 +76,32 @@ T* Contiguous<T>::index_at(int index){
 }
 
 template<typename T>
+void Contiguous<T>::insert_at(int index, T value){
+    while(index >= this->capacity){
+        this->grow();
+    }
+
+    for(int i = this->size; i >= index; i--){
+        this->header[i] = this->header[i-1];
+    }
+
+    for (int i = this->size; i<index; i++ ){
+        T v =0;
+        this->header[i] = v;
+        this -> size ++;
+    }
+
+    this -> header[index] = value;
+    this -> size ++;
+
+}
+
+template<typename T>
+T* Contiguous<T>::delete_at(int index){
+    return nullptr;
+}
+
+template<typename T>
 void Contiguous<T>::print(){
     if (this->size == 0) {
         cout << "[]"<< endl;
@@ -99,11 +125,12 @@ void Contiguous<T>::print(){
 
 int main(){
     Contiguous<int> c;
-    for (int i = 0; i < 300; i ++) {
+    for (int i = 0; i < 30; i ++) {
         c.push_back(i);
-        c.print();
     }
 
-    c.clear();
+    c.insert_at(2, 100);
+        c.insert_at(50, 200);
     c.print();
+
 }
