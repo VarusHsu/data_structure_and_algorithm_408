@@ -7,9 +7,9 @@ template<typename T>
 
 class Contiguous{
     private: 
-    T* header;
-    int size;
-    int capacity;
+    T* header; // 线性表头指针
+    int size; // 线性表容量
+    int capacity;  // 线性表容量
     void grow();
     public:
     Contiguous();

@@ -5,14 +5,18 @@ using namespace std;
 template <typename T>
 Contiguous<T>::Contiguous()
 {
+    // 初始化线性表
     this->capacity = INITIAL_CAPACITY;
     this->size = 0;
     this->header = new T[INITIAL_CAPACITY];
 }
-
 template <typename T>
 Contiguous<T>::~Contiguous()
 {
+    // 销毁线性表
+    this->clear();
+    this->capacity = 0;
+    delete this-> header;
 }
 
 template <typename T>
@@ -38,7 +42,6 @@ void Contiguous<T>::clear()
     {
         this->pop_back();
     }
-    return;
 }
 
 template <typename T>
@@ -123,14 +126,14 @@ T *Contiguous<T>::delete_at(int index)
         return nullptr;    
     }
 
-    T *value = this->header[index];
+    T* value = &this->header[index];
 
     for (int i = index; i< this->size-1; i++){
         this->header[i] = this-> header[i + 1];
     }
 
     this -> size --;
-    return &value;
+    return value;
 }
 
 template <typename T>
