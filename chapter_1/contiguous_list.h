@@ -1,29 +1,30 @@
-# ifndef CONTIGUOUS_H_
-# define CONTIGUOUS_H_
-# define INITIAL_CAPACITY (0)
-# define THRESHOLD (256)
+#ifndef CONTIGUOUS_H_
+#define CONTIGUOUS_H_
+#define INITIAL_CAPACITY (0)
+#define THRESHOLD (256)
 #include <iostream>
 #include "contiguous_list.h"
 using namespace std;
 
-template<typename T>
-class Contiguous{
-    private: 
-    T* header; // 线性表头指针
-    int size; // 线性表容量
-    int capacity;  // 线性表容量
-    void grow(); // 线性表扩容
-    public:
-    Contiguous(); // 构造函数
-    ~Contiguous(); // 析构函数
+template <typename T>
+class Contiguous
+{
+private:
+    T *header;    // 线性表头指针
+    int size;     // 线性表容量
+    int capacity; // 线性表容量
+    void grow();  // 线性表扩容
+public:
+    Contiguous();    // 构造函数
+    ~Contiguous();   // 析构函数
     bool is_empty(); // 判断线性表是否为空
-    T* pop_back();
+    T *pop_back();
     void push_back(T);
     void clear();
     int length();
-    T* index_at(int);
+    T *index_at(int);
     void insert_at(int, T);
-    T* delete_at(int);
+    T *delete_at(int);
     void print(); // for test;
 };
 
@@ -42,7 +43,7 @@ Contiguous<T>::~Contiguous()
     // 销毁线性表
     this->clear();
     this->capacity = 0;
-    delete this-> header;
+    delete this->header;
 }
 
 template <typename T>
@@ -148,17 +149,19 @@ void Contiguous<T>::insert_at(int index, T value)
 template <typename T>
 T *Contiguous<T>::delete_at(int index)
 {
-    if (this->size<= index){
-        return nullptr;    
+    if (this->size <= index)
+    {
+        return nullptr;
     }
 
-    T* value = &this->header[index];
+    T *value = &this->header[index];
 
-    for (int i = index; i< this->size-1; i++){
-        this->header[i] = this-> header[i + 1];
+    for (int i = index; i < this->size - 1; i++)
+    {
+        this->header[i] = this->header[i + 1];
     }
 
-    this -> size --;
+    this->size--;
     return value;
 }
 
@@ -190,4 +193,4 @@ void Contiguous<T>::print()
     cout << "The length of contiguous is " << this->size << ";" << endl;
     cout << "The capacity of contiguous is " << this->capacity << ";" << endl;
 }
-# endif
+#endif
