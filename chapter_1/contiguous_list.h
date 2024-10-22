@@ -10,11 +10,11 @@ class Contiguous{
     T* header; // 线性表头指针
     int size; // 线性表容量
     int capacity;  // 线性表容量
-    void grow();
+    void grow(); // 线性表扩容
     public:
-    Contiguous();
-    ~Contiguous();
-    bool is_empty();
+    Contiguous(); // 构造函数
+    ~Contiguous(); // 析构函数
+    bool is_empty(); // 判断线性表是否为空
     T* pop_back();
     void push_back(T);
     void clear();

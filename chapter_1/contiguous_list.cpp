@@ -164,23 +164,3 @@ void Contiguous<T>::print()
     cout << "The length of contiguous is " << this->size << ";" << endl;
     cout << "The capacity of contiguous is " << this->capacity << ";" << endl;
 }
-
-int main()
-{
-    Contiguous<int> c;
-    for (int i = 0; i < 30; i++)
-    {
-        c.push_back(i);
-    }
-
-    c.insert_at(2, 100);
-    c.insert_at(50, 200);
-    c.print();
-
-    c.delete_at(2);
-    c.print();
-
-    c.delete_at(49);
-    c.print();
-
-}
