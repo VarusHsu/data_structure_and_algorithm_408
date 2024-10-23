@@ -13,6 +13,7 @@ void test_contiguous_list_is_empty();
 void test_contiguous_list_push_back();
 void test_contiguous_list_pop_back();
 void test_contiguous_list_clear();
+void test_contiguous_list_length();
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
     test_contiguous_list_push_back();
     test_contiguous_list_pop_back();
     test_contiguous_list_clear();
+    test_contiguous_list_length();
 
     return 0;
 }
@@ -180,4 +182,34 @@ void test_contiguous_list_clear()
     assert_equals_array(c, expect);
     int now2 = now_nanosecond();
     std::cerr << "test_contiguous_list_clear end cost: " << now2 - now << "ns" << std::endl;
+}
+
+void test_contiguous_list_length()
+{
+    std::cerr << "test_contiguous_list_length start" << std::endl;
+    int now = now_nanosecond();
+
+    Contiguous<int> c;
+    assert_equals_int(c.length(), 0);
+
+    c.push_back(1);
+    assert_equals_int(c.length(), 1);
+
+    c.pop_back();
+    assert_equals_int(c.length(), 0);
+
+    c.pop_back();
+    assert_equals_int(c.length(), 0);
+
+    for (int i = 0; i < 5000; i++)
+    {
+        c.push_back(i);
+    }
+    assert_equals_int(c.length(), 5000);
+
+    c.clear();
+    assert_equals_int(c.length(), 0);
+
+    int now2 = now_nanosecond();
+    std::cerr << "test_contiguous_list_length end cost: " << now2 - now << "ns" << std::endl;
 }
