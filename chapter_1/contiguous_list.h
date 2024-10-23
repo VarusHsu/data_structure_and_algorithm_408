@@ -18,13 +18,13 @@ public:
     Contiguous();    // 构造函数
     ~Contiguous();   // 析构函数
     bool is_empty(); // 判断线性表是否为空
-    T *pop_back();
+    void pop_back(T*);
     void push_back(T);
     void clear();
     int length();
-    T *index_at(int);
+    void index_at(int,T*);
     void insert_at(int, T);
-    T *delete_at(int);
+    void delete_at(int,T*);
     void print(); // for test;
 };
 
@@ -53,13 +53,17 @@ bool Contiguous<T>::is_empty()
 }
 
 template <typename T>
-T *Contiguous<T>::pop_back()
+void Contiguous<T>::pop_back(T* value)
 {
     if (this->size == 0)
     {
-        return nullptr;
+        return;
     }
-    return &this->header[--this->size];
+
+    if (value != nullptr){
+        *value = this->header[--this->size];
+    }
+    return;
 }
 
 template <typename T>
@@ -112,14 +116,18 @@ int Contiguous<T>::length()
 }
 
 template <typename T>
-T *Contiguous<T>::index_at(int index)
+void Contiguous<T>::index_at(int index, T* value)
 {
     if (index >= this->size)
     {
-        return nullptr;
+        return;
     }
 
-    return &this->header[index];
+    if (value != nullptr)
+    {
+        *value = this->header[index];
+    }
+    return;
 }
 
 template <typename T>
@@ -147,14 +155,16 @@ void Contiguous<T>::insert_at(int index, T value)
 }
 
 template <typename T>
-T *Contiguous<T>::delete_at(int index)
+void Contiguous<T>::delete_at(int index, T* value)
 {
     if (this->size <= index)
     {
         return nullptr;
     }
 
-    T *value = &this->header[index];
+    if (value != nullptr){
+        *value = this->header[index];
+    }
 
     for (int i = index; i < this->size - 1; i++)
     {
@@ -162,7 +172,7 @@ T *Contiguous<T>::delete_at(int index)
     }
 
     this->size--;
-    return value;
+    return;
 }
 
 template <typename T>
