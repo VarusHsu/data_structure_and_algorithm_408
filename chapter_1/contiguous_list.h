@@ -24,6 +24,7 @@ public:
     void clear();
     int length();
     void index_at(int,T*);
+    int index_of(T);
     void insert_at(int, T);
     void delete_at(int,T*);
     void print(); // for test;
@@ -132,6 +133,21 @@ void Contiguous<T>::index_at(int index, T* value)
         *value = this->header[index];
     }
     return;
+}
+
+template <typename T>
+int Contiguous<T>::index_of(T value)
+{
+    int index = -1;
+    for (int i = 0; i < this->length(); i ++) {
+        T v ;
+        this->index_at(i, &v);
+        if (v == value) {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 template <typename T>
