@@ -4,6 +4,7 @@
 #define THRESHOLD (256)
 #include <iostream>
 #include "contiguous_list.h"
+#include "vector"
 using namespace std;
 
 template <typename T>
@@ -43,6 +44,7 @@ Contiguous<T>::~Contiguous()
     // 销毁线性表
     this->clear();
     this->capacity = 0;
+    vector<int> a;
     delete this->header;
 }
 
@@ -60,8 +62,10 @@ void Contiguous<T>::pop_back(T* value)
         return;
     }
 
+    T temp = this->header[--this->size];
+
     if (value != nullptr){
-        *value = this->header[--this->size];
+        *value = temp;
     }
     return;
 }
@@ -71,7 +75,7 @@ void Contiguous<T>::clear()
 {
     while (this->size > 0)
     {
-        this->pop_back();
+        this->pop_back(nullptr);
     }
 }
 
@@ -159,7 +163,8 @@ void Contiguous<T>::delete_at(int index, T* value)
 {
     if (this->size <= index)
     {
-        return nullptr;
+        *value = nullptr;
+        return;
     }
 
     if (value != nullptr){

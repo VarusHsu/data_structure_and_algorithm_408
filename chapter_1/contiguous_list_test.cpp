@@ -54,9 +54,11 @@ bool assert_equals_array(Contiguous<int> &c, int *array)
 {
     for (int i = 0; i < c.length(); i++)
     {
-        if (*c.index_at(i) != array[i])
+        int a;
+        c.index_at(i, &a);
+        if (a != array[i])
         {
-            std::cerr << "assert failed: " << *c.index_at(i) << " is not equals to " << array[i] << ", index at: " << i << std::endl;
+            std::cerr << "assert failed: " << a << " is not equals to " << array[i] << ", index at: " << i << std::endl;
             print_call_stack();
             exit(1);
         }
@@ -97,7 +99,7 @@ void test_contiguous_list_is_empty()
     assert_equals_bool(c.is_empty(), true);
     c.push_back(1);
     assert_equals_bool(c.is_empty(), false); // wrong
-    c.pop_back();
+    c.pop_back(nullptr);
     assert_equals_bool(c.is_empty(), true);
     c.push_back(1);
     c.push_back(1);
@@ -145,16 +147,17 @@ void test_contiguous_list_pop_back()
 
     Contiguous<int> c;
     c.push_back(1);
-    int *a = c.pop_back();
-    assert_equals_int(1, *a);
+    int a;
+    c.pop_back(&a);
+    assert_equals_int(1, a);
 
     c.push_back(2);
     c.push_back(3);
-    a = c.pop_back();
-    assert_equals_int(3, *a);
+    c.pop_back(&a);
+    assert_equals_int(3, a);
 
-    a = c.pop_back();
-    assert_equals_int(2, *a);
+    c.pop_back(&a);
+    assert_equals_int(2, a);
 
     int now2 = now_nanosecond();
     std::cerr << "test_contiguous_list_pop_back end cost: " << now2 - now << "ns" << std::endl;
@@ -195,10 +198,10 @@ void test_contiguous_list_length()
     c.push_back(1);
     assert_equals_int(c.length(), 1);
 
-    c.pop_back();
+    c.pop_back(nullptr);
     assert_equals_int(c.length(), 0);
 
-    c.pop_back();
+    c.pop_back(nullptr);
     assert_equals_int(c.length(), 0);
 
     for (int i = 0; i < 5000; i++)
