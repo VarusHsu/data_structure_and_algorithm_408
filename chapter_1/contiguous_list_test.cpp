@@ -19,6 +19,7 @@ void test_contiguous_list_clear();
 void test_contiguous_list_length();
 void test_contiguous_list_index_at();
 void test_contiguous_list_index_of();
+void test_contiguous_list_insert_at();
 
 int main()
 {
@@ -29,6 +30,7 @@ int main()
     test_contiguous_list_length();
     test_contiguous_list_index_at();
     test_contiguous_list_index_of();
+    test_contiguous_list_insert_at();
     return 0;
 }
 
@@ -327,4 +329,36 @@ void test_contiguous_list_index_of()
 
     int now2 = now_nanosecond();
     std::cerr << "test_contiguous_list_index_of end cost: " << duration_string(now2 - now) << std::endl;
+}
+
+void test_contiguous_list_insert_at() {
+    std::cerr << "test_contiguous_list_insert_at start" << std::endl;
+    int now = now_nanosecond();
+
+    Contiguous<int> c;
+    c.insert_at(0, 1);
+
+    int expect1[] = {1};
+    assert_equals_array(c, expect1);
+
+    c.clear();
+    c.insert_at(1, 1);
+    int expect2[] = {0, 1};
+    assert_equals_array(c, expect2);
+
+    c.clear();
+    c.insert_at(5, 2);
+    int expect3[] = {0,0,0,0,0,2};
+    assert_equals_array(c, expect3);
+
+    c.clear();
+    c.insert_at(10000, 2);
+    int expect4[10001] ={};
+    expect4[10000] = 2;
+    assert_equals_array(c, expect4);
+
+
+    int now2 = now_nanosecond();
+    std::cerr << "test_contiguous_list_insert_at end cost: " << duration_string(now2 - now) << std::endl;
+
 }
